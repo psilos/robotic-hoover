@@ -22,7 +22,7 @@ object Application {
   }
 
   def parseFile(file: Source): (Room, Array[Char]) = {
-    val dirt = ListBuffer[(Int, Int)]()
+    val dirtySpots = ListBuffer[(Int, Int)]()
     var instructions = Array[Char]()
 
     val lines = file.getLines()
@@ -31,12 +31,12 @@ object Application {
 
     for (line <- lines) {
       line.split(" ") match {
-        case Array(x, y) => dirt += Tuple2(x.toInt, y.toInt)
+        case Array(x, y) => dirtySpots += Tuple2(x.toInt, y.toInt)
         case x => instructions = x.flatten
       }
     }
 
-    val room = Room(dimensions, dirt, hooverCoordinates)
+    val room = Room(dimensions, dirtySpots, hooverCoordinates)
 
     (room, instructions)
   }
