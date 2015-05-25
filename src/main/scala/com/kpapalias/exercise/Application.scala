@@ -15,8 +15,8 @@ object Application {
       val spotsCleaned = applyInstructions(room, instructions)
       outputResult(room.hooverPosition, spotsCleaned)
     } catch {
-      case ex: FileNotFoundException => println("Couldn't find that file.")
-      case ex: IOException => println("Had an IOException trying to read that file")
+      case ex: FileNotFoundException => println("Couldn't find the file: " + fileName)
+      case ex: IOException => println("Had an IOException while trying to read file: " + fileName)
     }
 
   }
@@ -60,7 +60,6 @@ object Application {
   implicit def lineToPair(line: String): (Int, Int) = {
     line.split(" ") match {
       case Array(x, y) => Tuple2(x.toInt, y.toInt)
-      case _ => throw new RuntimeException("Unexpected line format: " + line)
     }
   }
 }
